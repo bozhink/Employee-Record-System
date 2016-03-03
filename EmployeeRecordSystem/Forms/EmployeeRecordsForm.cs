@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace EmployeeRecordSystem.Forms
+﻿namespace EmployeeRecordSystem.Forms
 {
+    using System;
+    using System.Windows.Forms;
+
     public partial class EmployeeRecordsForm : Form
     {
         public EmployeeRecordsForm()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+        }
+
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
