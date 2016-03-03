@@ -1,6 +1,6 @@
 ﻿namespace EmployeeRecordSystem.Forms
 {
-    partial class MainForm
+    partial class EmployeeRecordsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // EmployeeRecordsForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "MainForm";
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(714, 391);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(730, 430);
+            this.Name = "EmployeeRecordsForm";
+            this.Text = "Employee Records Monitoring System";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
