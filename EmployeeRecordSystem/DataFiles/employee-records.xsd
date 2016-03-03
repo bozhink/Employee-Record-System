@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:e="urn:schema-employee-data-records.com" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:schema-employee-data-records.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="data-records" type="e:dataRecordsType" />
+  <xs:simpleType name="idType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="E\d{4,}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="gradeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="A" />
+      <xs:enumeration value="B" />
+      <xs:enumeration value="C" />
+      <xs:enumeration value="D" />
+      <xs:enumeration value="E" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="detailsType">
+    <xs:attribute name="date-of-join" type="xs:date" use="required" />
+    <xs:attribute name="grade" type="e:gradeType" use="required" />
+    <xs:attribute name="salary" type="xs:unsignedShort" use="required" />
+  </xs:complexType>
+  <xs:complexType name="codeType">
+    <xs:sequence>
+      <xs:element name="details" type="e:detailsType" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+    <xs:attribute name="id" type="e:idType" use="required" />
+    <xs:attribute name="employee-name" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="dataRecordsType">
+    <xs:sequence>
+      <xs:element name="code" type="e:codeType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
