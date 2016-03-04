@@ -18,7 +18,7 @@
   <xs:complexType name="detailsType">
     <xs:attribute name="date-of-join" type="xs:date" use="required" />
     <xs:attribute name="grade" type="e:gradeType" use="required" />
-    <xs:attribute name="salary" type="xs:unsignedShort" use="required" />
+    <xs:attribute name="salary" type="xs:decimal" use="required" />
   </xs:complexType>
   <xs:complexType name="codeType">
     <xs:sequence>

@@ -5,6 +5,12 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeRecordSystem", "EmployeeRecordSystem\EmployeeRecordSystem.csproj", "{367F6A6E-1EDF-47F1-AE7B-B046CD1E5144}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{A7036313-FEDF-440F-ABE3-7839AB2D5346}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeRecordSystem.Services", "Services\EmployeeRecordSystem.Services\EmployeeRecordSystem.Services.csproj", "{F44164B5-5B65-42D4-B562-CEEC14931D7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeRecordSystem.Services.Models", "Services\EmployeeRecordSystem.Services.Models\EmployeeRecordSystem.Services.Models.csproj", "{418E0EEB-90BC-44DF-AB09-06847A9AF03A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +21,20 @@ Global
 		{367F6A6E-1EDF-47F1-AE7B-B046CD1E5144}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{367F6A6E-1EDF-47F1-AE7B-B046CD1E5144}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{367F6A6E-1EDF-47F1-AE7B-B046CD1E5144}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F44164B5-5B65-42D4-B562-CEEC14931D7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F44164B5-5B65-42D4-B562-CEEC14931D7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F44164B5-5B65-42D4-B562-CEEC14931D7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F44164B5-5B65-42D4-B562-CEEC14931D7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{418E0EEB-90BC-44DF-AB09-06847A9AF03A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{418E0EEB-90BC-44DF-AB09-06847A9AF03A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{418E0EEB-90BC-44DF-AB09-06847A9AF03A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{418E0EEB-90BC-44DF-AB09-06847A9AF03A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F44164B5-5B65-42D4-B562-CEEC14931D7C} = {A7036313-FEDF-440F-ABE3-7839AB2D5346}
+		{418E0EEB-90BC-44DF-AB09-06847A9AF03A} = {A7036313-FEDF-440F-ABE3-7839AB2D5346}
 	EndGlobalSection
 EndGlobal
