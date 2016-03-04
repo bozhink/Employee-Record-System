@@ -35,12 +35,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IEmployeeSerializationService.cs" />
     <Compile Include="Contracts\IXmlSerializationService.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\EmployeeSerializationService.cs" />
     <Compile Include="Services\XmlSerializationService.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\EmployeeRecordSystem.Services.Models\EmployeeRecordSystem.Services.Models.csproj">
+      <Project>{418e0eeb-90bc-44df-ab09-06847a9af03a}</Project>
+      <Name>EmployeeRecordSystem.Services.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
