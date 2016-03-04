@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeRecordSystem.Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeRecordSystem.Services.Models", "Services\EmployeeRecordSystem.Services.Models\EmployeeRecordSystem.Services.Models.csproj", "{418E0EEB-90BC-44DF-AB09-06847A9AF03A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services.Tests", "Services.Tests", "{A3C0EE4F-09B3-4C64-8A39-610C6C98EE0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeRecordSystem.Services.Tests", "Services.Tests\EmployeeRecordSystem.Services.Tests\EmployeeRecordSystem.Services.Tests.csproj", "{86E3A3C3-CA69-4066-8F79-CABC1EBABC6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +33,10 @@ Global
 		{418E0EEB-90BC-44DF-AB09-06847A9AF03A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{418E0EEB-90BC-44DF-AB09-06847A9AF03A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{418E0EEB-90BC-44DF-AB09-06847A9AF03A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86E3A3C3-CA69-4066-8F79-CABC1EBABC6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86E3A3C3-CA69-4066-8F79-CABC1EBABC6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86E3A3C3-CA69-4066-8F79-CABC1EBABC6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86E3A3C3-CA69-4066-8F79-CABC1EBABC6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,5 +44,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F44164B5-5B65-42D4-B562-CEEC14931D7C} = {A7036313-FEDF-440F-ABE3-7839AB2D5346}
 		{418E0EEB-90BC-44DF-AB09-06847A9AF03A} = {A7036313-FEDF-440F-ABE3-7839AB2D5346}
+		{86E3A3C3-CA69-4066-8F79-CABC1EBABC6A} = {A3C0EE4F-09B3-4C64-8A39-610C6C98EE0E}
 	EndGlobalSection
 EndGlobal
