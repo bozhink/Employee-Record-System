@@ -34,5 +34,161 @@ namespace EmployeeRecordSystem {
                 this["InitialOpenDirectory"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Employee Records")]
+        public string TreeViewRootNodeName {
+            get {
+                return ((string)(this["TreeViewRootNodeName"]));
+            }
+            set {
+                this["TreeViewRootNodeName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Employee Name")]
+        public string EmployeeNameColumnName {
+            get {
+                return ((string)(this["EmployeeNameColumnName"]));
+            }
+            set {
+                this["EmployeeNameColumnName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("255")]
+        public int EmployeeNameColumnWidth {
+            get {
+                return ((int)(this["EmployeeNameColumnWidth"]));
+            }
+            set {
+                this["EmployeeNameColumnWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Left")]
+        public global::System.Windows.Forms.HorizontalAlignment EmployeeNameColumnHorizontalAlignment {
+            get {
+                return ((global::System.Windows.Forms.HorizontalAlignment)(this["EmployeeNameColumnHorizontalAlignment"]));
+            }
+            set {
+                this["EmployeeNameColumnHorizontalAlignment"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Date of join")]
+        public string DateOfJoinColumnName {
+            get {
+                return ((string)(this["DateOfJoinColumnName"]));
+            }
+            set {
+                this["DateOfJoinColumnName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("70")]
+        public int DateOfJoinColumnWidth {
+            get {
+                return ((int)(this["DateOfJoinColumnWidth"]));
+            }
+            set {
+                this["DateOfJoinColumnWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Right")]
+        public global::System.Windows.Forms.HorizontalAlignment DateOfJoinColumnHorizontalAlignment {
+            get {
+                return ((global::System.Windows.Forms.HorizontalAlignment)(this["DateOfJoinColumnHorizontalAlignment"]));
+            }
+            set {
+                this["DateOfJoinColumnHorizontalAlignment"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Grade")]
+        public string GradeColumnName {
+            get {
+                return ((string)(this["GradeColumnName"]));
+            }
+            set {
+                this["GradeColumnName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("105")]
+        public int GradeColumnWidth {
+            get {
+                return ((int)(this["GradeColumnWidth"]));
+            }
+            set {
+                this["GradeColumnWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Left")]
+        public global::System.Windows.Forms.HorizontalAlignment GradeColumnHorizontalAlignment {
+            get {
+                return ((global::System.Windows.Forms.HorizontalAlignment)(this["GradeColumnHorizontalAlignment"]));
+            }
+            set {
+                this["GradeColumnHorizontalAlignment"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Salary")]
+        public string SalaryColumnName {
+            get {
+                return ((string)(this["SalaryColumnName"]));
+            }
+            set {
+                this["SalaryColumnName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("105")]
+        public int SalaryColumnWidth {
+            get {
+                return ((int)(this["SalaryColumnWidth"]));
+            }
+            set {
+                this["SalaryColumnWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Left")]
+        public global::System.Windows.Forms.HorizontalAlignment SalaryColumnHorizontalAlignment {
+            get {
+                return ((global::System.Windows.Forms.HorizontalAlignment)(this["SalaryColumnHorizontalAlignment"]));
+            }
+            set {
+                this["SalaryColumnHorizontalAlignment"] = value;
+            }
+        }
     }
 }

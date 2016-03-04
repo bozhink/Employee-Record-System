@@ -5,5 +5,44 @@
     <Setting Name="InitialOpenDirectory" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="TreeViewRootNodeName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Employee Records</Value>
+    </Setting>
+    <Setting Name="EmployeeNameColumnName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Employee Name</Value>
+    </Setting>
+    <Setting Name="EmployeeNameColumnWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">255</Value>
+    </Setting>
+    <Setting Name="EmployeeNameColumnHorizontalAlignment" Type="System.Windows.Forms.HorizontalAlignment" Scope="User">
+      <Value Profile="(Default)">Left</Value>
+    </Setting>
+    <Setting Name="DateOfJoinColumnName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Date of join</Value>
+    </Setting>
+    <Setting Name="DateOfJoinColumnWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">70</Value>
+    </Setting>
+    <Setting Name="DateOfJoinColumnHorizontalAlignment" Type="System.Windows.Forms.HorizontalAlignment" Scope="User">
+      <Value Profile="(Default)">Right</Value>
+    </Setting>
+    <Setting Name="GradeColumnName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Grade</Value>
+    </Setting>
+    <Setting Name="GradeColumnWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">105</Value>
+    </Setting>
+    <Setting Name="GradeColumnHorizontalAlignment" Type="System.Windows.Forms.HorizontalAlignment" Scope="User">
+      <Value Profile="(Default)">Left</Value>
+    </Setting>
+    <Setting Name="SalaryColumnName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Salary</Value>
+    </Setting>
+    <Setting Name="SalaryColumnWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">105</Value>
+    </Setting>
+    <Setting Name="SalaryColumnHorizontalAlignment" Type="System.Windows.Forms.HorizontalAlignment" Scope="User">
+      <Value Profile="(Default)">Left</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

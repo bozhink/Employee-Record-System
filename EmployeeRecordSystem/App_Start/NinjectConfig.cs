@@ -1,4 +1,4 @@
-﻿namespace EmployeeRecordSystem.App_Start
+﻿namespace EmployeeRecordSystem
 {
     using System.Reflection;
     using Ninject;

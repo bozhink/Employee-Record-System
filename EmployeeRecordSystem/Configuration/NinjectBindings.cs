@@ -1,4 +1,4 @@
-﻿namespace EmployeeRecordSystem.Settings
+﻿namespace EmployeeRecordSystem.Configuration
 {
     using Ninject.Extensions.Conventions;
     using Ninject.Modules;

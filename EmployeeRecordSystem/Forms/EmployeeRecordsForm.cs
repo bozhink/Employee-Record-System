@@ -1,14 +1,25 @@
 ﻿namespace EmployeeRecordSystem.Forms
 {
     using System;
+    using System.IO;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
     using System.Xml;
 
+    using Ninject;
+
+    using Services.Contracts;
+    using Services.Models.Xml;
+
     public partial class EmployeeRecordsForm : Form
     {
+        private string fileName;
+
         public EmployeeRecordsForm()
         {
             this.InitializeComponent();
+
+            this.fileName = null;
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -37,51 +48,52 @@
             var result = this.openFileDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                this.PopulateTreeView(this.openFileDialog.FileName);
-                ////string fileName = this.openFileDialog.FileName;
-                ////MessageBox.Show(fileName);
+                this.fileName = this.openFileDialog.FileName;
+                this.PopulateTreeView().GetAwaiter();
             }
 
             Settings.Default.InitialOpenDirectory = this.openFileDialog.InitialDirectory;
             Settings.Default.Save();
         }
 
-        private void PopulateTreeView(string fileName)
+        private async Task PopulateTreeView()
         {
-            this.toolStripStatusLabel.Text = "Refreshing employee Codes. Please wait...";
+            if (!File.Exists(this.fileName))
+            {
+                MessageBox.Show(Messages.FileDoesNotExistMessage);
+                return;
+            }
+
+            this.toolStripStatusLabel.Text = Messages.RefreshingEmployeeCodesMessage;
             this.Cursor = Cursors.WaitCursor;
-
-            this.treeView.Nodes.Clear();
-            var treeViewRootNode = new TreeNode("Employee Records");
-            this.treeView.Nodes.Add(treeViewRootNode);
-
-            TreeNodeCollection nodeCollection = treeViewRootNode.Nodes;
-            string stringValue = string.Empty;
 
             try
             {
-                var reader = XmlReader.Create(fileName);
-                reader.MoveToElement();
-                while (reader.Read())
+                this.treeView.Nodes.Clear();
+
+                var service = this.kernel.Get<IEmployeeSerializationService>();
+
+                DataRecords records = null;
+                using (var stream = new FileStream(fileName, FileMode.Open))
                 {
-                    if (reader.HasAttributes && reader.NodeType == XmlNodeType.Element)
-                    {
-                        reader.MoveToElement();
-                        reader.MoveToElement();
-                        reader.MoveToAttribute("id");
-                        stringValue = reader.Value;
-                        reader.Read();
-                        reader.Read();
-
-                        if (reader.Name == "Dept")
-                        {
-                            reader.Read();
-                        }
-
-                        TreeNode codeNode = new TreeNode(stringValue);
-                        nodeCollection.Add(codeNode);
-                    }
+                    records = await service.ReadEmployeeDataRecords(stream);
                 }
+
+                if (records == null)
+                {
+                    throw new ApplicationException(Messages.CannotReadEmployeeDataExceptionMessage);
+                }
+
+                var treeViewRootNode = new TreeNode(Settings.Default.TreeViewRootNodeName);
+                var nodeCollection = treeViewRootNode.Nodes;
+
+                foreach (var code in records.Codes)
+                {
+                    var codeNode = new TreeNode(code.Id);
+                    nodeCollection.Add(codeNode);
+                }
+
+                this.treeView.Nodes.Add(treeViewRootNode);
             }
             catch (Exception e)
             {
@@ -89,16 +101,22 @@
             }
 
             this.Cursor = Cursors.Default;
-
-            this.toolStripStatusLabel.Text = "Click on an employee record to see their record.";
+            this.toolStripStatusLabel.Text = Messages.SeeEmployeeRecordDataMessage;
         }
 
-        private void PopulateListView(string fileName, TreeNode treeNode)
+        private void PopulateListView(TreeNode treeNode)
         {
             this.InitializeListView();
+
+            if (!File.Exists(this.fileName))
+            {
+                MessageBox.Show(Messages.FileDoesNotExistMessage);
+                return;
+            }
+
             try
             {
-                var reader = XmlReader.Create(fileName);
+                var reader = XmlReader.Create(this.fileName);
                 reader.MoveToElement();
                 while (reader.Read())
                 {
@@ -152,10 +170,26 @@
         private void InitializeListView()
         {
             this.listView.Clear();
-            this.listView.Columns.Add("Employee Name", 255, HorizontalAlignment.Left);
-            this.listView.Columns.Add("Date of join", 70, HorizontalAlignment.Right);
-            this.listView.Columns.Add("Grade", 105, HorizontalAlignment.Left);
-            this.listView.Columns.Add("Salary", 105, HorizontalAlignment.Left);
+
+            this.listView.Columns.Add(
+                Settings.Default.EmployeeNameColumnName, 
+                Settings.Default.EmployeeNameColumnWidth,
+                Settings.Default.EmployeeNameColumnHorizontalAlignment);
+
+            this.listView.Columns.Add(
+                Settings.Default.DateOfJoinColumnName,
+                Settings.Default.DateOfJoinColumnWidth,
+                Settings.Default.DateOfJoinColumnHorizontalAlignment);
+
+            this.listView.Columns.Add(
+                Settings.Default.GradeColumnName,
+                Settings.Default.GradeColumnWidth,
+                Settings.Default.GradeColumnHorizontalAlignment);
+
+            this.listView.Columns.Add(
+                Settings.Default.SalaryColumnName,
+                Settings.Default.SalaryColumnWidth,
+                Settings.Default.SalaryColumnHorizontalAlignment);
         }
 
         private void TreeView_AfterSelect(object sender, TreeViewEventArgs e)
@@ -164,15 +198,15 @@
             if (this.treeView.TopNode == currentNode)
             {
                 this.InitializeListView();
-                this.toolStripStatusLabel.Text = "Double click the Employee Records.";
+                this.toolStripStatusLabel.Text = Messages.DoubleClickEmployeeRecordsMessage;
                 return;
             }
             else
             {
-                this.toolStripStatusLabel.Text = "Click an employee code to vew individual records.";
+                this.toolStripStatusLabel.Text = Messages.SeeEmployeeRecordDataMessage;
             }
 
-            this.PopulateListView(this.openFileDialog.FileName, currentNode);
+            this.PopulateListView(currentNode);
         }
     }
 }

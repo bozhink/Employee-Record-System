@@ -17,15 +17,25 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        private Ninject.IKernel kernel = null;
+
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (this.components != null))
+            if (disposing)
             {
-                this.components.Dispose();
+                if (this.components != null)
+                {
+                    this.components.Dispose();
+                }
+
+                if (this.kernel != null && !this.kernel.IsDisposed)
+                {
+                    this.kernel.Dispose();
+                }
             }
 
             base.Dispose(disposing);
@@ -39,6 +49,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.kernel = NinjectConfig.CreateKernel();
+
             this.treeView = new System.Windows.Forms.TreeView();
             this.listView = new System.Windows.Forms.ListView();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
