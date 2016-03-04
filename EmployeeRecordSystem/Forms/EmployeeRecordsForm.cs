@@ -58,10 +58,10 @@
             TreeNodeCollection nodeCollection = treeViewRootNode.Nodes;
             string stringValue = string.Empty;
 
-            var reader = XmlReader.Create(fileName);
-            reader.MoveToElement();
             try
             {
+                var reader = XmlReader.Create(fileName);
+                reader.MoveToElement();
                 while (reader.Read())
                 {
                     if (reader.HasAttributes && reader.NodeType == XmlNodeType.Element)
@@ -91,6 +91,88 @@
             this.Cursor = Cursors.Default;
 
             this.toolStripStatusLabel.Text = "Click on an employee record to see their record.";
+        }
+
+        private void PopulateListView(string fileName, TreeNode treeNode)
+        {
+            this.InitializeListView();
+            try
+            {
+                var reader = XmlReader.Create(fileName);
+                reader.MoveToElement();
+                while (reader.Read())
+                {
+                    string nodeName;
+                    string nodePath;
+                    string name;
+                    string grade;
+                    string dateOfJoin;
+                    string salary;
+                    string[] itemsArray = new string[4];
+
+                    reader.MoveToFirstAttribute();
+                    nodeName = reader.Value;
+                    nodePath = treeNode.FullPath.Remove(0, 17);
+
+                    if (nodePath == nodeName)
+                    {
+                        ListViewItem listViewItem;
+
+                        reader.MoveToNextAttribute();
+                        name = reader.Value;
+                        listViewItem = this.listView.Items.Add(name);
+
+                        reader.Read();
+                        reader.Read();
+
+                        reader.MoveToFirstAttribute();
+                        dateOfJoin = reader.Value;
+                        listViewItem.SubItems.Add(dateOfJoin);
+
+                        reader.MoveToNextAttribute();
+                        grade = reader.Value;
+                        listViewItem.SubItems.Add(grade);
+
+                        reader.MoveToNextAttribute();
+                        salary = reader.Value;
+                        listViewItem.SubItems.Add(salary);
+
+                        reader.MoveToNextAttribute();
+                        reader.MoveToElement();
+                        reader.Read();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+        }
+
+        private void InitializeListView()
+        {
+            this.listView.Clear();
+            this.listView.Columns.Add("Employee Name", 255, HorizontalAlignment.Left);
+            this.listView.Columns.Add("Date of join", 70, HorizontalAlignment.Right);
+            this.listView.Columns.Add("Grade", 105, HorizontalAlignment.Left);
+            this.listView.Columns.Add("Salary", 105, HorizontalAlignment.Left);
+        }
+
+        private void TreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            TreeNode currentNode = e.Node;
+            if (this.treeView.TopNode == currentNode)
+            {
+                this.InitializeListView();
+                this.toolStripStatusLabel.Text = "Double click the Employee Records.";
+                return;
+            }
+            else
+            {
+                this.toolStripStatusLabel.Text = "Click an employee code to vew individual records.";
+            }
+
+            this.PopulateListView(this.openFileDialog.FileName, currentNode);
         }
     }
 }
