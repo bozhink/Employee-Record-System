@@ -2,9 +2,9 @@
 {
     using System;
     using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Forms;
-    using System.Xml;
 
     using Ninject;
 
@@ -14,12 +14,14 @@
     public partial class EmployeeRecordsForm : Form
     {
         private string fileName;
+        private DataRecords records;
 
         public EmployeeRecordsForm()
         {
             this.InitializeComponent();
 
             this.fileName = null;
+            this.records = null;
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -73,13 +75,13 @@
 
                 var service = this.kernel.Get<IEmployeeSerializationService>();
 
-                DataRecords records = null;
-                using (var stream = new FileStream(fileName, FileMode.Open))
+                this.records = null;
+                using (var stream = new FileStream(this.fileName, FileMode.Open))
                 {
-                    records = await service.ReadEmployeeDataRecords(stream);
+                    this.records = await service.ReadEmployeeDataRecords(stream);
                 }
 
-                if (records == null)
+                if (this.records == null)
                 {
                     throw new ApplicationException(Messages.CannotReadEmployeeDataExceptionMessage);
                 }
@@ -87,7 +89,7 @@
                 var treeViewRootNode = new TreeNode(Settings.Default.TreeViewRootNodeName);
                 var nodeCollection = treeViewRootNode.Nodes;
 
-                foreach (var code in records.Codes)
+                foreach (var code in this.records.Codes)
                 {
                     var codeNode = new TreeNode(code.Id);
                     nodeCollection.Add(codeNode);
@@ -116,49 +118,16 @@
 
             try
             {
-                var reader = XmlReader.Create(this.fileName);
-                reader.MoveToElement();
-                while (reader.Read())
+                string id = treeNode.Text;
+
+                var matchingCodes = this.records.Codes.Where(i => i.Id == id);
+
+                foreach (var code in matchingCodes)
                 {
-                    string nodeName;
-                    string nodePath;
-                    string name;
-                    string grade;
-                    string dateOfJoin;
-                    string salary;
-                    string[] itemsArray = new string[4];
-
-                    reader.MoveToFirstAttribute();
-                    nodeName = reader.Value;
-                    nodePath = treeNode.FullPath.Remove(0, 17);
-
-                    if (nodePath == nodeName)
-                    {
-                        ListViewItem listViewItem;
-
-                        reader.MoveToNextAttribute();
-                        name = reader.Value;
-                        listViewItem = this.listView.Items.Add(name);
-
-                        reader.Read();
-                        reader.Read();
-
-                        reader.MoveToFirstAttribute();
-                        dateOfJoin = reader.Value;
-                        listViewItem.SubItems.Add(dateOfJoin);
-
-                        reader.MoveToNextAttribute();
-                        grade = reader.Value;
-                        listViewItem.SubItems.Add(grade);
-
-                        reader.MoveToNextAttribute();
-                        salary = reader.Value;
-                        listViewItem.SubItems.Add(salary);
-
-                        reader.MoveToNextAttribute();
-                        reader.MoveToElement();
-                        reader.Read();
-                    }
+                    ListViewItem listViewItem = this.listView.Items.Add(code.EmployeeName);
+                    listViewItem.SubItems.Add(code.Details.DateOfJoin.ToShortDateString());
+                    listViewItem.SubItems.Add(code.Details.Grade.ToString());
+                    listViewItem.SubItems.Add(code.Details.Salary.ToString());
                 }
             }
             catch (Exception e)
