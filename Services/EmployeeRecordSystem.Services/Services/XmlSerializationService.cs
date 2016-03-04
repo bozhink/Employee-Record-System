@@ -1,13 +1,13 @@
 ﻿namespace EmployeeRecordSystem.Services
 {
     using System.IO;
+    using System.Text;
     using System.Threading.Tasks;
     using System.Xml;
     using System.Xml.Serialization;
     using System.Xml.XPath;
 
     using Contracts;
-    using Extensions;
 
     public class XmlSerializationService : IXmlSerializationService
     {
@@ -29,9 +29,9 @@
             });
         }
 
-        public async Task<T> Deserialize<T>(string xml) where T : class
+        public async Task<T> Deserialize<T>(string xml, Encoding encoding) where T : class
         {
-            using (var stream = new MemoryStream(xml.GetBytes()))
+            using (var stream = new MemoryStream(encoding.GetBytes(xml)))
             {
                 return await this.Deserialize<T>(stream);
             }

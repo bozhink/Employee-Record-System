@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using System.Text;
     using System.Threading.Tasks;
     using System.Xml;
 
@@ -27,9 +28,9 @@
             return await this.service.Deserialize<DataRecords>(xml);
         }
 
-        public async Task<DataRecords> ReadEmployeeDataRecords(string xml)
+        public async Task<DataRecords> ReadEmployeeDataRecords(string xml, Encoding encoding)
         {
-            return await this.service.Deserialize<DataRecords>(xml);
+            return await this.service.Deserialize<DataRecords>(xml, encoding);
         }
 
         public async Task<XmlDocument> SerializeEmployeeDataRecords(DataRecords records)

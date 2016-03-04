@@ -1,6 +1,12 @@
 ﻿namespace EmployeeRecordSystem.Services.Tests
 {
+    using System;
+    using System.Configuration;
+    using System.IO;
+    using System.Text;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Models.Xml;
 
     [TestClass]
     public class XmlSerializationServiceTests
@@ -10,6 +16,59 @@
         {
             var service = new XmlSerializationService();
             Assert.IsNotNull(service, "Service should not be null");
+        }
+
+        [TestMethod]
+        public void XmlSerializationService_DeserializeStream_ShouldWork()
+        {
+            var fileName = $"{ConfigurationManager.AppSettings["DataFilesPath"]}/employee-records.xml";
+
+            using (var stream = new FileStream(fileName, FileMode.Open))
+            {
+                var service = new XmlSerializationService();
+                Assert.IsNotNull(service, "Service should not be null");
+
+                var records = service.Deserialize<DataRecords>(stream).Result;
+                Assert.IsNotNull(records, "Deserialized records should not be null.");
+
+                var codes = records.Codes;
+                Assert.IsNotNull(codes, "Deserialized codes should not be null.");
+
+                Assert.AreEqual(14, codes.Length, "Number of code items should be 14.");
+
+                var firstCode = codes[0];
+                Assert.AreEqual("E0001", firstCode.Id, "Id should match.");
+                Assert.AreEqual("Michael Perry", firstCode.EmployeeName, "EmployeeName should match.");
+                Assert.AreEqual(new DateTime(1999, 2, 2), firstCode.Details.DateOfJoin, "DateOfJoin should match.");
+                Assert.AreEqual(GradeType.A, firstCode.Details.Grade, "Grade should match.");
+                Assert.AreEqual(1750.0m, firstCode.Details.Salary, "Salary should match.");
+            }
+        }
+
+        [TestMethod]
+        public void XmlSerializationService_DeserializeXmlStringContent_ShouldWork()
+        {
+            var fileName = $"{ConfigurationManager.AppSettings["DataFilesPath"]}/employee-records.xml";
+
+            string xmlStringContent = File.ReadAllText(fileName, Encoding.UTF8);
+
+            var service = new XmlSerializationService();
+            Assert.IsNotNull(service, "Service should not be null");
+
+            var records = service.Deserialize<DataRecords>(xmlStringContent, Encoding.UTF8).Result;
+            Assert.IsNotNull(records, "Deserialized records should not be null.");
+
+            var codes = records.Codes;
+            Assert.IsNotNull(codes, "Deserialized codes should not be null.");
+
+            Assert.AreEqual(14, codes.Length, "Number of code items should be 14.");
+
+            var firstCode = codes[0];
+            Assert.AreEqual("E0001", firstCode.Id, "Id should match.");
+            Assert.AreEqual("Michael Perry", firstCode.EmployeeName, "EmployeeName should match.");
+            Assert.AreEqual(new DateTime(1999, 2, 2), firstCode.Details.DateOfJoin, "DateOfJoin should match.");
+            Assert.AreEqual(GradeType.A, firstCode.Details.Grade, "Grade should match.");
+            Assert.AreEqual(1750.0m, firstCode.Details.Salary, "Salary should match.");
         }
     }
 }

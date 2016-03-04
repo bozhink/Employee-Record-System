@@ -9,6 +9,6 @@
     public partial class DataRecords
     {
         [XmlElement("code")]
-        public DataRecordsCode[] Code { get; set; }
+        public DataRecordsCode[] Codes { get; set; }
     }
 }

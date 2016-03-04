@@ -9,7 +9,7 @@
   <e:code id="E0003" employee-name="George Rice">
     <e:details date-of-join="1999-04-18" grade="A" salary="1800" />
   </e:code>
-  <e:code id="E0044" employee-name="Pamela Griffin">
+  <e:code id="E0004" employee-name="Pamela Griffin">
     <e:details date-of-join="1999-05-03" grade="A" salary="7000" />
   </e:code>
   <e:code id="E0005" employee-name="Simon Watson">
