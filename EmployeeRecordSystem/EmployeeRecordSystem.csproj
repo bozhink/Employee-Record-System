@@ -34,6 +34,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Conventions, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Extensions.Conventions.3.2.0.0\lib\net45-full\Ninject.Extensions.Conventions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\NinjectConfig.cs" />
     <Compile Include="Forms\EmployeeRecordsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +69,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Settings\NinjectBindings.cs" />
+    <Compile Include="Settings\NinjectServicesBindings.cs" />
     <EmbeddedResource Include="Forms\EmployeeRecordsForm.resx">
       <DependentUpon>EmployeeRecordsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -73,6 +84,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -98,6 +110,16 @@
     <Content Include="DataFiles\employee-records.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Services\EmployeeRecordSystem.Services.Models\EmployeeRecordSystem.Services.Models.csproj">
+      <Project>{418e0eeb-90bc-44df-ab09-06847a9af03a}</Project>
+      <Name>EmployeeRecordSystem.Services.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\EmployeeRecordSystem.Services\EmployeeRecordSystem.Services.csproj">
+      <Project>{f44164b5-5b65-42d4-b562-ceec14931d7c}</Project>
+      <Name>EmployeeRecordSystem.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
