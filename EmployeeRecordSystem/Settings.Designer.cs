@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EmployeeRecordSystem.Properties {
+namespace EmployeeRecordSystem {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -20,6 +20,18 @@ namespace EmployeeRecordSystem.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string InitialOpenDirectory {
+            get {
+                return ((string)(this["InitialOpenDirectory"]));
+            }
+            set {
+                this["InitialOpenDirectory"] = value;
             }
         }
     }
