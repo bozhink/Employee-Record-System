@@ -4,6 +4,7 @@
     using System.Configuration;
     using System.IO;
     using System.Text;
+    using System.Xml;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Models.Xml;
@@ -56,6 +57,38 @@
             Assert.IsNotNull(service, "Service should not be null");
 
             var records = service.Deserialize<DataRecords>(xmlStringContent, Encoding.UTF8).Result;
+            Assert.IsNotNull(records, "Deserialized records should not be null.");
+
+            var codes = records.Codes;
+            Assert.IsNotNull(codes, "Deserialized codes should not be null.");
+
+            Assert.AreEqual(14, codes.Length, "Number of code items should be 14.");
+
+            var firstCode = codes[0];
+            Assert.AreEqual("E0001", firstCode.Id, "Id should match.");
+            Assert.AreEqual("Michael Perry", firstCode.EmployeeName, "EmployeeName should match.");
+            Assert.AreEqual(new DateTime(1999, 2, 2), firstCode.Details.DateOfJoin, "DateOfJoin should match.");
+            Assert.AreEqual(GradeType.A, firstCode.Details.Grade, "Grade should match.");
+            Assert.AreEqual(1750.0m, firstCode.Details.Salary, "Salary should match.");
+        }
+
+        [TestMethod]
+        public void XmlSerializationService_DeserializeIXPathNavigable_ShouldWork()
+        {
+            var fileName = $"{ConfigurationManager.AppSettings["DataFilesPath"]}/employee-records.xml";
+
+            XmlDocument document = new XmlDocument
+            {
+                PreserveWhitespace = true
+            };
+
+            document.Load(fileName);
+            Assert.IsNotNull(document.DocumentElement, "Sample XML document is not loaded.");
+
+            var service = new XmlSerializationService();
+            Assert.IsNotNull(service, "Service should not be null");
+
+            var records = service.Deserialize<DataRecords>(document).Result;
             Assert.IsNotNull(records, "Deserialized records should not be null.");
 
             var codes = records.Codes;
